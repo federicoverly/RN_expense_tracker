@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {COLORS, icons, SIZES} from '../constants';
 import CategoriesList from './CategoriesList';
@@ -210,17 +210,8 @@ const CategoriesSection = () => {
   const [categories, setCategories] = useState(categoriesData);
 
   return (
-    <View
-      style={{
-        flexDirection: 'column',
-      }}>
-      <View
-        style={{
-          flexDirection: 'row',
-          padding: SIZES.padding,
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+    <View style={styles.generalContainer}>
+      <View style={styles.iconsContainer}>
         {/* Title */}
         <View>
           <Text style={{color: COLORS.primary}}>CATEGORIES</Text>
@@ -230,51 +221,44 @@ const CategoriesSection = () => {
         </View>
 
         {/* Buttons */}
-        <View style={{flexDirection: 'row'}}>
+        <View style={styles.buttonsContainer}>
           <TouchableOpacity
             style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 50,
-              width: 50,
-              backgroundColor: viewMode == 'chart' ? COLORS.secondary : null,
-              borderRadius: 25,
+              ...styles.buttonContainer,
+              backgroundColor:
+                viewMode === 'chart' ? COLORS.secondary : undefined,
             }}
             onPress={() => setViewMode('chart')}>
             <Image
               source={icons.chart}
               resizeMode="contain"
               style={{
-                width: 20,
-                height: 20,
-                tintColor: viewMode == 'chart' ? COLORS.white : COLORS.darkgray,
+                ...styles.icon,
+                tintColor:
+                  viewMode === 'chart' ? COLORS.white : COLORS.darkgray,
               }}
             />
           </TouchableOpacity>
           <TouchableOpacity
             style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: 50,
-              width: 50,
-              backgroundColor: viewMode == 'list' ? COLORS.secondary : null,
-              borderRadius: 25,
+              ...styles.buttonContainer,
+              backgroundColor:
+                viewMode === 'list' ? COLORS.secondary : undefined,
             }}
             onPress={() => setViewMode('list')}>
             <Image
               source={icons.menu}
               resizeMode="contain"
               style={{
-                width: 20,
-                height: 20,
-                tintColor: viewMode == 'list' ? COLORS.white : COLORS.darkgray,
+                ...styles.icon,
+                tintColor: viewMode === 'list' ? COLORS.white : COLORS.darkgray,
               }}
             />
           </TouchableOpacity>
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={{paddingBottom: 60}}>
+      <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         {viewMode === 'list' && (
           <View>{<CategoriesList categories={categories} />}</View>
         )}
@@ -282,5 +266,34 @@ const CategoriesSection = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  generalContainer: {
+    flexDirection: 'column',
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    padding: SIZES.padding,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+  },
+  icon: {
+    width: 20,
+    height: 20,
+  },
+  scrollViewContainer: {
+    paddingBottom: 60,
+  },
+});
 
 export default CategoriesSection;

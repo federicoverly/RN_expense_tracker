@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import CategoriesSection from '../components/CategoriesSection';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
@@ -8,7 +8,7 @@ import {COLORS} from '../constants';
 
 export const Home = () => {
   return (
-    <View style={{flex: 1, backgroundColor: COLORS.lightGray2}}>
+    <View style={styles.container}>
       {/* Navbar */}
       <Navbar />
 
@@ -20,3 +20,10 @@ export const Home = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.lightGray2,
+  },
+});
