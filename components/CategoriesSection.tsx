@@ -3,6 +3,7 @@ import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {COLORS, icons, SIZES} from '../constants';
 import CategoriesList from './CategoriesList';
+import ChartComponent from './ChartComponent';
 
 const CategoriesSection = () => {
   const [viewMode, setViewMode] = useState<string>('chart');
@@ -262,6 +263,7 @@ const CategoriesSection = () => {
         {viewMode === 'list' && (
           <View>{<CategoriesList categories={categories} />}</View>
         )}
+        {viewMode === 'chart' && <ChartComponent categories={categories} />}
       </ScrollView>
     </View>
   );
